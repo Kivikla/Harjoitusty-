@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Timers;
 
 
-namespace Linearsearch
+namespace Binarysearch
 {
     class Program
     {
         static void Main(string[] args)
-        {   
+        {
             //Taulukon luonti
             int[] taul = new int[99999999];
             for (int i = 0; i < 99999999; i++)
@@ -27,21 +27,21 @@ namespace Linearsearch
                 taul[pos] = x;
             }*/
 
+            int mid, first = 0, last = taul.Length - 1;
             Console.WriteLine("Enter number:");
-            string j = Console.ReadLine();
-            int j2 = Int32.Parse(j);
-            var timer = System.Diagnostics.Stopwatch.StartNew(); //ajanotto alkaa
-            // haku 
-            for (int i = 0; i < 99999999; i++)
+            int target = int.Parse(Console.ReadLine());
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            while (first <= last)
             {
-                if (taul[i] == j2)
-                {
-                    Console.WriteLine("Search successful");
-                    Console.WriteLine("Element {0} found at location {1}", j2, i + 1);
-                }
-                //else Console.WriteLine("Did not found");
+                mid = (first + last) / 2;
+                if (target < taul[mid])
+                    first = mid + 1;
+                if (target > taul[mid])
+                    last = mid - 1;
+                else
+                    Console.WriteLine("Target " + target + " was found at index " + taul[mid]);
             }
-            var elapsed = timer.ElapsedMilliseconds.ToString(); // ajanotto päättyy
+            var elapsed = timer.ElapsedMilliseconds.ToString();
             Console.WriteLine("time: " + elapsed + " ms");
         }
     }
